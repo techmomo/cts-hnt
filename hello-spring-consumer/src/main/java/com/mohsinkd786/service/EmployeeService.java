@@ -6,6 +6,7 @@ import com.mohsinkd786.dto.EmployeeRequest;
 import com.mohsinkd786.dto.RawUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+//@Component
 @Service
 public class EmployeeService {
 
