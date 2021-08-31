@@ -16,6 +16,7 @@ public class HelloController {
         return "MESSAGE : "+message;
     }
 
+    // http://localhost:8080/calculate?a=1&b=9
     @GetMapping("/calculate")
     public double calculate(@RequestParam(required = false , defaultValue = "0") int a,
                             @RequestParam(required = false , defaultValue = "0") int b){
