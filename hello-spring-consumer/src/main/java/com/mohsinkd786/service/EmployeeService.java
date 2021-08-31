@@ -5,15 +5,14 @@ import com.mohsinkd786.dto.EmployeeDto;
 import com.mohsinkd786.dto.EmployeeRequest;
 import com.mohsinkd786.dto.RawUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 //@Component
 @Service
@@ -47,6 +46,30 @@ public class EmployeeService {
             return true;
         }
         return false;
+    }
+
+    public boolean updateEmployee(String empId,EmployeeDto employeeDto){
+
+        String url ="";
+        // put call
+        //Map<String,String> headers = new HashMap<>();
+        HttpEntity request = new HttpEntity(null);
+        ResponseEntity<String> responseEntity =  restTemplate.exchange(url, HttpMethod.PUT,request,String.class);
+
+        return false;
+    }
+
+    public EmployeeDto getEmployeeById(String id){
+        String url = helloSettings.getHelloBaseUrl().concat("v1/users/").concat(id);
+
+        ResponseEntity<RawUser> responseEntity = restTemplate.getForEntity(url,RawUser.class);
+        try{
+            EmployeeDto employeeDto = objectToDto(responseEntity.getBody());
+            return employeeDto;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     private EmployeeDto objectToDto(Object obj) throws Exception{
