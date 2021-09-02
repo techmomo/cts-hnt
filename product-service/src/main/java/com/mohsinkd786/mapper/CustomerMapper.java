@@ -20,24 +20,33 @@ public class CustomerMapper extends ConfigurableMapper {
 
         factory.registerClassMap(
                 factory.classMap(CustomerDto.class, Customer.class)
-                    .fieldAToB("username","credentials.username")
-                    .fieldAToB("password","credentials.password")
-                    .byDefault()
-                    //.customize(new AddressCustomMapper())
-                    .toClassMap());
+                        .fieldAToB("username", "credentials.username")
+                        .fieldAToB("password", "credentials.password")
+                        .byDefault()
+                        .field("addresses{city}","addresses{city}")
+                        .field("addresses{streetName}","addresses{city}")
+                        .field("addresses{}","addresses{city}")
+                        .toClassMap());
 
         factory.registerClassMap(
                 factory.classMap(CustomerDto.class, Credentials.class)
-                .byDefault());
+                        .byDefault());
     }
 
-    private static class AddressCustomMapper extends CustomMapper<Set<AddressDto>, Set<Address>>{
-        @Override
-        public void mapAtoB(Set<AddressDto> addressDto,Set<Address> address, MappingContext context) {
-            super.mapAtoB(addressDto, address, context);
-//            addressDto.setCity(address.getCity());
-//////            addressDto.setPinCode(address.getZipCode());
-//////            addressDto.setStreetName(address.getStreet());
-        }
+}
+
+class AddressCustomMapper extends CustomMapper<AddressDto,Address>{
+    @Override
+    public void mapAtoB(AddressDto addressDto,Address address, MappingContext context) {
+        addressDto.setCity(address.getCity());
+        addressDto.setPinCode(address.getZipCode());
+        addressDto.setStreetName(address.getStreet());
+    }
+
+    @Override
+    public void mapBtoA(Address address, AddressDto addressDto, MappingContext context) {
+        address.setCity(addressDto.getCity());
+        address.setStreet(addressDto.getStreetName());
+        address.setZipCode(addressDto.getPinCode());
     }
 }

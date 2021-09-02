@@ -12,9 +12,9 @@ public class AddressMapper extends ConfigurableMapper {
     protected void configure(MapperFactory factory) {
         factory.registerClassMap(factory.classMap(Address.class, AddressDto.class)
                 .byDefault()
-//                .field("city","city")
-//                .field("street","streetName")
-//                .field("zipCode","pinCode")
+                .field("city","city")
+                .field("street","streetName")
+                .field("zipCode","pinCode")
         );
     }
 }

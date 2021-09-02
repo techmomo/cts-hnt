@@ -20,6 +20,6 @@ public class Customer {
     @JoinColumn(name = "id") // primary key for credentials
     private Credentials credentials;
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer")
     private Set<Address> addresses;
 }
