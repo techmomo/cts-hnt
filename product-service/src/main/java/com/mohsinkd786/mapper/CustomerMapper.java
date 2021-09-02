@@ -33,6 +33,7 @@ class AddressCustomMapper extends CustomMapper<CustomerDto, Customer> {
 
     @Override
     public void mapAtoB(final CustomerDto customerDto,final Customer customer, MappingContext context) {
+        customer.getAddresses().clear();
         customerDto.getAddresses().forEach(addressDto->{
             Address address = new Address();
             address.setCity(addressDto.getCity());
@@ -44,6 +45,7 @@ class AddressCustomMapper extends CustomMapper<CustomerDto, Customer> {
 
     @Override
     public void mapBtoA(final Customer customer,final CustomerDto customerDto, MappingContext context) {
+        customerDto.getAddresses().clear();
         customer.getAddresses().forEach(address->{
             AddressDto addressDto = new AddressDto();
             addressDto.setCity(address.getCity());
