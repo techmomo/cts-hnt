@@ -2,6 +2,8 @@ package com.mohsinkd786.dtos;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class CustomerDto {
     private String name;
@@ -9,4 +11,5 @@ public class CustomerDto {
     private String phone;
     private String username;
     private String password;
+    private Set<AddressDto> addresses;
 }

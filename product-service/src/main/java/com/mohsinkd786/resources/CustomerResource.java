@@ -26,4 +26,9 @@ public class CustomerResource {
     public List<CustomerDto> findCustomers(){
         return customerService.findCustomers();
     }
+
+    @GetMapping("{city}")
+    public List<CustomerDto> findCustomersByCity(@PathVariable String city){
+        return customerService.findCustomersByCity(city);
+    }
 }

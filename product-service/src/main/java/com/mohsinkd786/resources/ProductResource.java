@@ -43,4 +43,10 @@ public class ProductResource {
     public ProductDto updateProduct(@RequestBody ProductDto productDto){
         return productService.modifyProduct(productDto);
     }
+
+    @GetMapping("/price/range")
+    public List<ProductDto> findProductsWithPriceRange(@RequestParam double priceStart,
+                                                       @RequestParam double priceEnd){
+        return productService.findProductsWithPriceRange(priceStart,priceEnd);
+    }
 }

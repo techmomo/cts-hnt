@@ -56,4 +56,11 @@ public class ProductService {
         productRepository.delete(product);
         return true;
     }
+
+    public List<ProductDto> findProductsWithPriceRange(double priceStart, double priceEnd){
+        return productRepository.findProductsWithPriceInRange(priceStart,priceEnd)
+                .stream()
+                .map(product -> toDto(product))
+                .collect(Collectors.toList());
+    }
 }
