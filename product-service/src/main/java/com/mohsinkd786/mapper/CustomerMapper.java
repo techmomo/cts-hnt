@@ -11,42 +11,45 @@ import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
-
 @Component
 public class CustomerMapper extends ConfigurableMapper {
     @Override
     protected void configure(MapperFactory factory) {
-
+        super.configure(factory);
         factory.registerClassMap(
                 factory.classMap(CustomerDto.class, Customer.class)
-                        .fieldAToB("username", "credentials.username")
-                        .fieldAToB("password", "credentials.password")
                         .byDefault()
-                        .field("addresses{city}","addresses{city}")
-                        .field("addresses{streetName}","addresses{city}")
-                        .field("addresses{}","addresses{city}")
+                        .field("username", "credentials.username")
+                        .field("password", "credentials.password")
+                        .customize(new AddressCustomMapper())
                         .toClassMap());
 
         factory.registerClassMap(
                 factory.classMap(CustomerDto.class, Credentials.class)
                         .byDefault());
     }
-
 }
+class AddressCustomMapper extends CustomMapper<CustomerDto, Customer> {
 
-class AddressCustomMapper extends CustomMapper<AddressDto,Address>{
     @Override
-    public void mapAtoB(AddressDto addressDto,Address address, MappingContext context) {
-        addressDto.setCity(address.getCity());
-        addressDto.setPinCode(address.getZipCode());
-        addressDto.setStreetName(address.getStreet());
+    public void mapAtoB(final CustomerDto customerDto,final Customer customer, MappingContext context) {
+        customerDto.getAddresses().forEach(addressDto->{
+            Address address = new Address();
+            address.setCity(addressDto.getCity());
+            address.setZipCode(addressDto.getPinCode());
+            address.setStreet(addressDto.getStreetName());
+            customer.getAddresses().add(address);
+        });
     }
 
     @Override
-    public void mapBtoA(Address address, AddressDto addressDto, MappingContext context) {
-        address.setCity(addressDto.getCity());
-        address.setStreet(addressDto.getStreetName());
-        address.setZipCode(addressDto.getPinCode());
+    public void mapBtoA(final Customer customer,final CustomerDto customerDto, MappingContext context) {
+        customer.getAddresses().forEach(address->{
+            AddressDto addressDto = new AddressDto();
+            addressDto.setCity(address.getCity());
+            addressDto.setPinCode(address.getZipCode());
+            addressDto.setStreetName(address.getStreet());
+            customerDto.getAddresses().add(addressDto);
+        });
     }
 }
