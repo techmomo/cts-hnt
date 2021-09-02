@@ -2,6 +2,7 @@ package com.mohsinkd786.data.repos;
 
 import com.mohsinkd786.data.entities.Product;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -20,4 +21,15 @@ public interface ProductRepository extends CrudRepository<Product,Integer> {
     // named parameters
    //@Query("SELECT p from Product p WHERE p.price > :start AND p.price < :end ")
    //List<Product> findProductsWithPriceInRange(@Param("start") double start,@Param("end") double end);
+
+    // create procedure GET_PRODUCTS()
+    // BEGIN
+    // SELECT * FROM product;
+    // END
+    // @Procedure
+    // List<Product> GET_PRODUCTS();
+
+    // @Procedure(name = "GET_PRODUCTS")
+    // List<Product findProductsViaProc();
+
 }
