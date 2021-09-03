@@ -17,8 +17,8 @@ import java.util.function.Function;
 public class JwtTokenUtil implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
+    //@Value("${jwt.secret}")
+    private String jwtSecret = "secret";
 
     // few things needed
     // username from token
@@ -54,8 +54,7 @@ public class JwtTokenUtil implements Serializable {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 10000)) // fix this
-                .signWith(SignatureAlgorithm.HS512,jwtSecret)
-                .compact();
+                .signWith(SignatureAlgorithm.HS512,jwtSecret).compact();
     }
 
     public Boolean validateToken(String token,UserDetails userDetails){
