@@ -17,8 +17,8 @@ import java.util.function.Function;
 public class JwtTokenUtil implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //@Value("${jwt.secret}")
-    private String jwtSecret = "secret";
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     // few things needed
     // username from token

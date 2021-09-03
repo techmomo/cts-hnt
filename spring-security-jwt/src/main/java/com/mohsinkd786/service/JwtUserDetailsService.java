@@ -18,6 +18,8 @@ public class JwtUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username.equals(username)){
             // pass : admin
+            // spring allows only hashed passwords = https://bcrypt-generator.com/
+            // ideally the username & hashed password should come from database
             return new User(username,"$2a$12$denAuLFG3y7Sr9cnTZheyeaU/P1zib1LFXjJkmtJuQRXvCmsSraXq",new ArrayList<>());
         }else {
             throw new UsernameNotFoundException("User not found : "+username);
