@@ -1,0 +1,18 @@
+<h3>Home Component</h3>
+
+<ul *ngFor="let m of messages">
+   <li>{{ m | uppercase | split }}</li>
+</ul>
+
+ <!-- event binding -->
+ <button (click)="clickMe()">Click Me!</button>
+   
+<span *ngIf="status">
+    <!-- <strong>{{info}}</strong> -->
+    <!-- one way binding -->
+    <h2 [innerText]="info"></h2>
+    
+    <!-- two way binding -->
+    <input type="text" (change)="clickNum1($event)"/>
+    <input type="text" (change)="clickNum2($event)"/>
+</span>

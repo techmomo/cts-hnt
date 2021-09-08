@@ -28,3 +28,7 @@ export class AppComponent {
 // Step 4: Install angular cli
 // npm i -g @angular/cli@8.2
 
+
+// Step 5: Create a Component
+// ng g c components/home
+
