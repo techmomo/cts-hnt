@@ -9,3 +9,22 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'App Component';
 }
+
+
+// Step 1 : clone the repo :
+// git clone https://github.com/techmomo/cts-hnt.git
+// In case already cloned
+// go to repo
+// cd cts-hnt 
+// git pull
+
+// Step 2: download dependencies
+// npm install
+
+// Step 3: run the project
+// npm start
+
+
+// Step 4: Install angular cli
+// npm i -g @angular/cli@8.2
+
