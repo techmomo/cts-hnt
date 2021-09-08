@@ -7,12 +7,16 @@
  <!-- event binding -->
  <button (click)="clickMe()">Click Me!</button>
    
-<span *ngIf="status">
+<span *ngIf="status; else invalid">
     <!-- <strong>{{info}}</strong> -->
     <!-- one way binding -->
     <h2 [innerText]="info"></h2>
     
     <!-- two way binding -->
-    <input type="text" (change)="clickNum1($event)"/>
-    <input type="text" (change)="clickNum2($event)"/>
+    <div><input type="text" (change)="clickNum1($event)"/></div>
+    <div><input type="text" (change)="clickNum2($event)"/></div>
 </span>
+
+<ng-template #invalid>
+    Invalid login credentials specified
+</ng-template>
