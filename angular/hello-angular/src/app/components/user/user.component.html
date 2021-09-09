@@ -1,0 +1,37 @@
+<div *ngIf="users">
+    <fieldset>
+        <legend>List of Users</legend>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Salary</th>
+                    <th>Date of Birth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let u of users">
+                    <td>{{u.id}}</td>
+                    <td>{{u.name}}</td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.salary | currency : "INR"}}</td>
+                    <td>{{u.dob | age}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>Add User</legend>
+        <form [formGroup]="userForm" (submit)="saveUser()">
+            <input type="number" name="id" placeholder="Id"  class="input" formControlName="id"/>
+            <input type="text" name="name" placeholder="Name" class="input" formControlName="name"/>
+            <input type="email" name="email" placeholder="Email" class="input" formControlName="email"/>
+            <input type="number" name="salary" placeholder="Salary" class="input" formControlName="salary"/>
+            <input type="date" name="dob" placeholder="Dob" class="input" formControlName="dob" />
+            <button type="submit">Save User</button>
+        </form>
+    </fieldset>
+</div>
