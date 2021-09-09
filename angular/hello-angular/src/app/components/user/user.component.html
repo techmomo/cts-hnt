@@ -25,6 +25,27 @@
 
     <fieldset>
         <legend>Add User</legend>
+        <span *ngIf="errorMessage">
+            <div *ngIf="userForm.controls['id'].errors">
+                <i class="error">Id is Required</i>
+            </div>
+            <div *ngIf="userForm.controls['name'].errors">
+                <i class="error">Name is Required</i>
+            </div>
+            <div *ngIf="userForm.controls['email'].errors">
+                <div *ngIf="userForm.controls['email'].errors.required">
+                    <i class="error">Email is Required</i>
+                </div>
+                <div *ngIf="userForm.controls['email'].errors.email">
+                    <i class="error">Email is in Incorrect format : info@email.com</i>
+                </div>
+            </div>
+            <div *ngIf="userForm.controls['salary'].errors">
+                <div *ngIf="userForm.controls['salary'].errors.min || userForm.controls['salary'].errors.max">
+                    <i class="error">Salary should be within 600 to 5000</i>
+                </div>
+            </div>
+        </span>
         <form [formGroup]="userForm" (submit)="saveUser()">
             <input type="number" name="id" placeholder="Id"  class="input" formControlName="id"/>
             <input type="text" name="name" placeholder="Name" class="input" formControlName="name"/>

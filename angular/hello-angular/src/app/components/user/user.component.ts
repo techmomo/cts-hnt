@@ -11,6 +11,7 @@ export class UserComponent implements OnInit {
 
   users:UserDto[]
   userForm:FormGroup
+  errorMessage:string
   // constructor injection for services
   constructor(private service:UserService) { }
 
@@ -38,13 +39,18 @@ export class UserComponent implements OnInit {
 
   // events
   saveUser(){
-    console.log(this.userForm.value);
-    this.addUser({
-      id: this.userForm.value.id,
-      name: this.userForm.value.name,
-      email: this.userForm.value.email,
-      salary: this.userForm.value.salary,
-      dob: new Date(this.userForm.value.dob)
-    });
+    console.log(this.userForm);
+    if(this.userForm.status !== 'INVALID'){
+      this.errorMessage = undefined;
+      this.addUser({
+        id: this.userForm.value.id,
+        name: this.userForm.value.name,
+        email: this.userForm.value.email,
+        salary: this.userForm.value.salary,
+        dob: new Date(this.userForm.value.dob)
+      });
+    }else{
+      this.errorMessage = 'Please verify your errors';
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DateUtil } from '../utils/date.util';
 
 @Injectable({
   providedIn: 'root'
@@ -42,14 +43,18 @@ export class UserService {
   }
 
   buildUserForm():FormGroup{
+    const date = new Date();
+    const strDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    console.log(strDate);
     return this.builder.group({
-      id: '',
-      name: '',
-      email: '',
-      salary: '',
-      dob: ''
+      id: ['',Validators.required],
+      name: ['',Validators.required],
+      email: ['',[ Validators.required, Validators.email]],
+      salary: ['',[Validators.min(600),Validators.max(5000)]],
+      dob: DateUtil.getLocaleDateString(new Date('01/11/1990'))
     });
   }
+  
   getUsers():UserDto[]{
     return this.users;
   }
